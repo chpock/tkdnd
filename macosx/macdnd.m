@@ -24,7 +24,7 @@
 #import <Cocoa/Cocoa.h>
 #import <Availability.h>
 
-/* 
+/*
    Check, if Tcl version supports Tcl_Size,
    which was introduced in Tcl 8.7 and 9.
 
@@ -460,7 +460,7 @@ const NSString *TKDND_Obj2NSString(Tcl_Interp *interp, Tcl_Obj *obj) {
     case TYPE_NSHTMLPboardType:                       {str = NSHTMLPboardType                      ; break;}
     case TYPE_NSMultipleTextSelectionPboardType:      {str = NSMultipleTextSelectionPboardType     ; break;}
     case TYPE_NSPDFPboardType:                        {str = NSPDFPboardType                       ; break;}
-    case TYPE_NSPICTPboardType:                       {str = TYPE_NSPICTPboardType                 ; break;}
+    case TYPE_NSPICTPboardType:                       {str = [NSString stringWithFormat:@"%d", TYPE_NSPICTPboardType]; break;}
     case TYPE_NSRTFDPboardType:                       {str = NSRTFDPboardType                      ; break;}
     case TYPE_NSRTFPboardType:                        {str = NSRTFPboardType                       ; break;}
     case TYPE_NSRulerPboardType:                      {str = NSRulerPboardType                     ; break;}
@@ -1041,7 +1041,7 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
             icon_size = NSMakeSize(32.0, 32.0);
             image     = [NSImage imageNamed:NSImageNameMultipleDocuments];
           }
- 
+
 #ifdef TKDND_ARC
           NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:pboardItem];
 #else
@@ -1089,7 +1089,7 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
       /* An unknown (or user defined) type. Silently skip it... */
     }
   }
-  
+
   /* Generate an event. */
   NSEvent *event = [NSEvent mouseEventWithType:TKDND_NSLEFTMOUSEDRAGGED
                                       location:imageLocation
@@ -1478,7 +1478,7 @@ int TkDND_GenericType2OStypeObjCmd(ClientData clientData, Tcl_Interp *interp,
     (char *) NULL
   };
   static char *OSTypes[] = {
-    "NSPasteboardTypeString", 
+    "NSPasteboardTypeString",
 #ifdef TKDND_HIGH_SIERRA_OR_LATER
     "NSPasteboardTypeFileURL"
 #else
